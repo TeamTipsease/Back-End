@@ -1,0 +1,30 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "Repo for Tipsease back end",
+  "main": "index.js",
+  "dependencies": {
+    "cleaner": "^2.0.0-alpha",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "init": "^0.1.2",
+    "knex": "^0.20.2",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamTipsease/Back-End.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeamTipsease/Back-End/issues"
+  },
+  "homepage": "https://github.com/TeamTipsease/Back-End#readme"
+}
