@@ -11,7 +11,7 @@ exports.up = function(knex) {
       tbl.integer('month_at_job').notNullable();
       tbl.varchar('info', 255).notNullable();
       tbl.varchar('tagline', 100).notNullable();
-      tip.integer('tip')
+      tbl.integer('tip')
   })
 };
 
