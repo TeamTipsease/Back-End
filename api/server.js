@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 require('dotenv').config()
+const morgan = require('morgan')
 
 const auth = require('../auth/authRouter.js')
 const home = require('../home/homeRouter.js')
@@ -11,6 +12,7 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 server.use(helmet());
+server.use(morgan('combined'));
 
 server.use('./api/auth/', auth)
 server.use('./api/home/', home)

@@ -1,10 +1,10 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('auth').del()
+  return knex('auth').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('auth').insert([
+      return knex('users').insert([
         {id: 1, username: 'JimmyJohnFan1352', password: 'password123', role: 'worker'},
         {id: 2, username: 'BigOhioStateFan12', password: 'password456', role: 'worker'},
         {id: 3, username: 'IHateTheLakers', password: 'password789', role: 'customer'}, 
