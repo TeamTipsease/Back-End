@@ -41,7 +41,7 @@ router.post('/register', (req, res) => {
                 else{
                     userN[i].completed = true
             }}
-            res.status(200).json(token)
+            res.status(200).json({userN,token})
         })
         .catch(error => {
             console.log(error)
@@ -59,7 +59,8 @@ router.post('/login', (req, res) => {
                 const token = generateToken(user);
                 res.status(200).json({
                     message: `Welcome ${user.username}! Here's a token...`,
-                    token,
+                    user,
+                    token
                   });
             }
             else{
