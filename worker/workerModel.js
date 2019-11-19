@@ -4,26 +4,36 @@ function getWorkers() {
     return db('service_workers');
 }
 
-function getUsers() {
-    return db('users');
+function findByWorkerId(id){
+    return db('service_workers').where({ id }).first()
 }
 
-function getWorkerById(id) {
+function insertWorker(worker) {
+    return db('service_workers')
+    .insert(worker, 'id')
+    .then(id => {
+        return findByWorkerId(id[0]);
+    });
+ }
+
+function deleteWorker(id) {
     return db('service_workers')
     .where({ id })
-    .first();
+    .del();
 }
 
-function getUserById(id) {
-    return db('users')
+function updateWorker(update, id) {
+    return db('service_workers')
     .where({ id })
-    .first();
-}
+    .update(update)
+    .then((ids) => ids);
+ }
+
 
 module.exports = {
     getWorkers,
-    getUsers,
-    getWorkerById,
-    getUserById,
-
+    findByWorkerId,
+    insertWorker,
+    deleteWorker,
+    updateWorker
 }

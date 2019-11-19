@@ -20,7 +20,7 @@
 //     testing: {
 //       client: 'sqlite3',
 //       connection: {
-//         filename: './data/test.db3',
+//         filename: './data/test1.db3',
 //       },
 //       useNullAsDefault: true,
 //       migrations: {
@@ -51,3 +51,37 @@
 
 // };
 
+module.exports = { 
+
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/tips.db3',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  },
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/test.db3',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  },
+
+staging: {
+  client: 'postgresql',
+}
+
+};
