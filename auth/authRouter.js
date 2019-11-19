@@ -1,8 +1,29 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Users = require('./authModel.js')
+const Users = require('./authModel.js');
+const requireAuth = require('./authMiddleware.js');
+const secret = require('../config/secret')
 
+router.get('/', requireAuth, (req, res) => {
+    Users.find()
+      .then(banana => {
+        res.json(banana);
+      })
+      .catch(err => res.send(err));
+});
+
+router.get('/:id', (req, res) => {
+    let id = req.params.id;
+
+    Users.findById(id)
+    .then(user => {
+        const username = user.username;
+        const worker = user.isServiceWorker;
+        res.status(200).json({ username: username, isServiceWorker: worker  });
+    })
+    .catch(err => res.status(500).json({ message: 'User with specified ID does not exist.', error: error }));
+})
 
 router.post('/register', (req, res) => {
   const user = req.body;
@@ -13,6 +34,13 @@ router.post('/register', (req, res) => {
     Users.insert(user)
         .then(userN => {
             const token = generateToken(userN)
+            for( let i = 0; i < userN.length; i++){
+                if(userN[i].completed == 0){
+                    userN[i].completed = false
+                }
+                else{
+                    userN[i].completed = true
+            }}
             res.status(200).json(token)
         })
         .catch(error => {
@@ -20,7 +48,6 @@ router.post('/register', (req, res) => {
             res.status(500).json(error);
           });
 });
-
 
 
 router.post('/login', (req, res) => {
@@ -46,13 +73,13 @@ router.post('/login', (req, res) => {
 });
 
 function generateToken(user){
-  const payload = {
-      username: user.username,
-      password: user.password
-  };
-  const options ={
-      expiresIn: '1d'
-  };
-  return jwt.sign(payload, process.env.JWT_SECRET, options);
+    const payload = {
+        username: user.username,
+        password: user.password
+    };
+    const options ={
+        expiresIn: '1d'
+    };
+    return jwt.sign(payload, secret.jwtSecret, options);
 }
 module.exports = router;
