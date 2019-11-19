@@ -5,7 +5,6 @@ require('dotenv').config()
 const morgan = require('morgan')
 
 const auth = require('../auth/authRouter.js')
-const home = require('../home/homeRouter.js')
 const worker = require('../worker/workerRouter.js')
 
 const server = express();
@@ -15,12 +14,13 @@ server.use(helmet());
 server.use(morgan('combined'));
 
 server.use('./api/auth/', auth)
-server.use('./api/home/', home)
-// server.use('./api/worker', worker)
+server.use('./api/worker', worker)
 
 server.get('/', (req,res) => {
     res.send('Hello!')
 })
+
+server.listen(process.env.PORT);
 
 module.exports = server;
 
