@@ -41,7 +41,7 @@ router.post('/register', (req, res) => {
                 else{
                     userN[i].completed = true
             }}
-            res.status(200).json({userN,token})
+            res.status(201).json({userN,token})
         })
         .catch(error => {
             console.log(error)
