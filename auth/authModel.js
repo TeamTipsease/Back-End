@@ -4,7 +4,8 @@ module.exports = {
     find,
     insert,
     findById,
-    filtering
+    filtering,
+    deleteuser
 }
 
 function find(){
@@ -23,4 +24,10 @@ async function insert(user) {
 
 function filtering(usingThis) {
     return db('users').where(usingThis).first()
+}
+
+function deleteuser(id) {
+    return db('users')
+    .where({ id })
+    .del();
 }

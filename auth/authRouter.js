@@ -73,6 +73,21 @@ router.post('/login', (req, res) => {
         })
 });
 
+router.delete('/:id', (req, res) => {
+    Users.deleteUser(req.params.id)
+    .then(event => {
+        if (!event) {
+            res.status(404).json({message: " No event exists by that ID!"})
+        } else {
+            res.status(200).json({message: "deleted"})
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+    })
+});
+
 function generateToken(user){
     const payload = {
         username: user.username,
