@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req,res) => {
-    const {id} = req.params
+    const {id } = req.params
     Workers.findByWorkerId(id)
       .then(worker => {
         if(worker){
@@ -25,7 +25,13 @@ router.get('/:id', (req,res) => {
         })
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
+    console.log(req.body)
+    // const ObjToPass = { 
+    //     user_id : req.params.id
+    // }
+    req.body.user_id = req.params.id 
+    console.log(req.body)
     Workers.insertWorker(req.body)
     .then(event => {
         res.status(201).json({...event, message: "worker posted"})

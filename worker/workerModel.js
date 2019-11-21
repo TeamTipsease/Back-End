@@ -4,27 +4,30 @@ function getWorkers() {
     return db('service_workers');
 }
 
-function findByWorkerId(user_id){
-    return db('service_workers').where({ user_id }).first()
+function findByWorkerId(id){
+    return db('service_workers')
+    .where({ id }).first()
 }
 
 function insertWorker(worker) {
     return db('service_workers')
-    .insert(worker, 'id')
-    .then(user_id => {
-        return findByWorkerId(user_id[0]);
+    .insert(worker)
+    .then(id => {
+        console.log(id)
+        return findByWorkerId(id[0]);
+        // return id;
     });
  }
 
-function deleteWorker(user_id) {
+function deleteWorker(id) {
     return db('service_workers')
-    .where({ user_id })
+    .where({ id })
     .del();
 }
 
-function updateWorker(update, user_id) {
+function updateWorker(update, id) {
     return db('service_workers')
-    .where({ user_id })
+    .where({ id })
     .update(update)
     .then((ids) => ids);
  }
