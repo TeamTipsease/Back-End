@@ -1,12 +1,12 @@
-
 exports.up = function(knex) {
+
   return knex.schema.createTable('service_workers', tbl => {
       tbl.increments();
       tbl.integer('user_id')
         .unsigned().notNullable()
-        .references('users.id')
-        .onUpdate('cascade')
-        .onDelete('cascade');
+        .references('id').inTable('users')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       tbl.varchar('name', 50).notNullable();
       tbl.integer('month_at_job').notNullable();
       tbl.varchar('info', 255).notNullable();
@@ -16,5 +16,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('serviceworkers')
+  return knex.schema.dropTable('service_workers')
 };

@@ -1,5 +1,7 @@
 
 exports.seed = function(knex) {
+  return knex('service_workers').del()
+  .then(function () {
   return knex('service_workers').insert([
     {
       user_id: 1, 
@@ -34,4 +36,5 @@ exports.seed = function(knex) {
       tip: 50, 
     }
   ]);
+});
 };
