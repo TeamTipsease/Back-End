@@ -4,9 +4,10 @@ function getWorkers() {
     return db('service_workers');
 }
 
-function findByWorkerId(id){
-    return db('service_workers')
-    .where({ id }).first()
+async function findByWorkerId(id){
+    const result = await db.raw(`SELECT * FROM service_workers WHERE id = ${id}`)
+    console.log(result)
+    return result[0]
 }
 
 function insertWorker(worker) {
