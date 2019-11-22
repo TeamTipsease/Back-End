@@ -5,7 +5,7 @@ module.exports = {
     insert,
     findById,
     filtering,
-    deleteuser
+    deleteUser
 }
 
 function find(){
@@ -26,7 +26,7 @@ function filtering(usingThis) {
     return db('users').where(usingThis).first()
 }
 
-function deleteuser(id) {
+function deleteUser(id) {
     return db('users')
     .where({ id })
     .del();
